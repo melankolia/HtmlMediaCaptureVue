@@ -32,7 +32,7 @@
             supported: function (attribute) {
                 var i = document.createElement('input');
                 i.setAttribute(attribute, true);
-                this.log = String(i[attribute])
+                this.log = String("log :", i[attribute])
                 return !!i[attribute];
             },
             showImage: function(event){
