@@ -15,7 +15,8 @@
         </p> <br>
 
         <input type="file" accept="image/*" capture v-on:change="showImage"> <br>
-        <img v-bind:src="source" alt="" style="width: 20%; height: 20%; margin: 20px 0;">
+        <img v-bind:src="source" alt="" style="width: 20%; height: 20%; margin: 20px 0;"> <br>
+        <p>{{ log }}</p>
 
     </div>
 </body>
@@ -24,13 +25,14 @@
         el: "#app",
         data: {
             title: "Hello World",
-            source: ""
+            source: "",
+            log: ""
         },
         methods: {
             supported: function (attribute) {
                 var i = document.createElement('input');
                 i.setAttribute(attribute, true);
-                console.log(i[attribute])
+                this.log = String(i[attribute])
                 return !!i[attribute];
             },
             showImage: function(event){
