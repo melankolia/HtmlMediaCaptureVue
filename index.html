@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <p id="supported">
+            <strong v-if="supported('capture')"> It appears @capture is supported </strong>
+            <strong v-else>It appears @capture is not supported, <a href="https://vigorous-shannon-fc7412.netlify.com"><em>Link</em></a></strong>
+        </p> <br>
+
+        <input type="file" accept="image/*" capture v-on:change="showImage"> <br>
+        <img v-bind:src="source" alt="" style="width: 50%; height: 50%; margin: 20px 0;">
+
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            title: "Hello World",
+            source: ""
+        },
+        methods: {
+            supported: function (attribute) {
+                var i = document.createElement('input');
+                i.setAttribute(attribute, true);
+                return !!i[attribute];
+            },
+            showImage: function(event){
+                const file = event.target.files[0]
+                console.log(URL.createObjectURL(file))
+                this.source = URL.createObjectURL(file);
+            }
+        }
+    })
+</script>
+</html>
